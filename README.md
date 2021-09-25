@@ -1,7 +1,7 @@
 # SpyroBot
 
 <p align="center">
-  <img src="./Img/SpyroBot-github.png">
+  <img src="./Img/spyrobot_github.png">
 </p>
 
 <div align="center">
