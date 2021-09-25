@@ -75,14 +75,11 @@ bot.on('message', async message => {
     return;
   }
 
-  let commandUsed = AllCMD.SpyroBot.parse(message, prefix, bot) || AllCMD.givexp.parse(message, prefix) || AllCMD.Help.parse(message, prefix) || AllCMD.MalFoutu.parse(message, prefix) 
+  let commandUsed = AllCMD.SpyroBot.parse(message, prefix, bot) || AllCMD.givexp.parse(message, prefix) || AllCMD.Help.parse(message, prefix)
   || AllCMD.Kick.parse(message, prefix) || AllCMD.Ban.parse(message, prefix) || AllCMD.Warn.parse(message, prefix) || AllCMD.Infractions.parse(message, prefix) 
-  || AllCMD.Baka.parse(message, prefix) || AllCMD.Meme.parse(message, prefix) || AllCMD.Clear.parse(message, prefix) || AllCMD.Crash.parse(message, prefix) 
-  || AllCMD.Quoi.parse(message, prefix) || AllCMD.Diagonale.parse(message, prefix) || AllCMD.UserInfo.parse(message, prefix) || AllCMD.Report.parse(message, prefix) 
-  || AllCMD.LogsChannel.parse(message, prefix) || AllCMD.QueueChannel.parse(message, prefix) || AllCMD.FaitsDivers.parse(message, prefix) || AllCMD.AddFaitsDivers.parse(message, prefix) 
-  || AllCMD.runTest.parse(message, prefix) || AllCMD.cmdPrefix.parse(message, prefix) || AllCMD.cmdStatus.parse(message, prefix) || AllCMD.Coin.parse(message, prefix)
-  || AllCMD.Constitution.parse(message, prefix) || AllCMD.OpenPattern.parse(message, prefix) || AllCMD.Focus.parse(message, prefix) || AllCMD.RulesCommand.parse(message, prefix)
-  || AllCMD.rank.parse(message, prefix);
+  || AllCMD.Meme.parse(message, prefix) || AllCMD.Clear.parse(message, prefix) || AllCMD.rank.parse(message, prefix) || AllCMD.Coin.parse(message, prefix)
+  || AllCMD.Diagonale.parse(message, prefix) || AllCMD.Report.parse(message, prefix) || AllCMD.RulesCommand.parse(message, prefix)
+  || AllCMD.LogsChannel.parse(message, prefix) || AllCMD.QueueChannel.parse(message, prefix) || AllCMD.runTest.parse(message, prefix)
 
   if(commandUsed == false) {
     AllCMD.xp.execute(message.author, message, prefix, bot)
@@ -101,9 +98,6 @@ bot.on('message', async message => {
     return;
   } else if (message.content.toString().toLowerCase().startsWith(`${prefix}volume`)) {
     volume(message, serverQueue);
-    return;
-  } else if (message.content.toString().toLowerCase().startsWith(`${prefix}*volume`)) {
-    multiplyVolume(message, serverQueue);
     return;
   } else if (message.content.toString().toLowerCase().startsWith(`${prefix}queue`)) {
     sendQueue(message, serverQueue);
@@ -125,9 +119,6 @@ bot.on('message', async message => {
     return;
   } else if (message.content.toString().toLowerCase().startsWith(`${prefix}bots`)) {
     botsYEY(message);
-    return;
-  } else if (message.content.toString().toLowerCase().startsWith(`${prefix}editreact`)) {
-    editreact(message);
     return;
   }
 });
@@ -228,6 +219,7 @@ function play(guild, song) {
   // serverQueue.textchannel.send({ embeds: [embed] });
 }
 
+
 function skip(message, serverQueue) {
   /*
   permet de passer à la musique suivante, si la personne utilisant la commande
@@ -272,6 +264,7 @@ function stop(message, serverQueue) {
   message.react("🛑")
 }
 
+
 function volume(message, serverQueue) {
   /*
   permet de changer le volume de la musique
@@ -295,25 +288,6 @@ function volume(message, serverQueue) {
   // message.channel.send({ embeds: [embed] });
 }
 
-function multiplyVolume(message, serverQueue) {
-  /*
-  ne sert à rien, il faut que je l'enlève
-  */
-  if (!message.member.voice.channel)
-    return message.channel.send(
-      "You have to be in a voice channel to change the volume !"
-    );
-  if (!serverQueue)
-    return message.channel.send("There is no song !");
-  let actualVol = serverQueue.connection.dispatcher.volume
-  let vol = message.content.toString().toLowerCase().split(' ')[1];
-  serverQueue.connection.dispatcher.setVolume(actualVol * vol);
-  const embed = new MessageEmbed()
-    .setColor("#0042ff")
-    .addField("Volume multiplied by :", `${vol}`)
-  message.channel.send(embed);
-  // message.channel.send({ embeds: [embed] });
-}
 
 function sendQueue(message, serverQueue) {
   /*
@@ -358,7 +332,7 @@ function loup(message, serverQueue) {
 
 function info(message) {
   /**
-   * envoie des informations sur le vot
+   * envoie des informations sur le bot
    */
   const embed = new MessageEmbed()
     .setColor("#5465FF")
@@ -392,45 +366,6 @@ function botsYEY(message) {
   message.channel.send(`Ce serveur compte de nombreux Bots, néanmoins, certains sont uniques. \nLa quasi-intégralité des commandes et automatisations du serveur sont gérées par des Bots custom : ${bot.user}, ${Stinger} et ${JAAJmo}. \nCes Bots ont été créés respectivement par ${moi}, ${VBat} et ${Mikwel}. Nous les mettons à jour régulièrement, et comme ils sont de notre création, on peut faire ce que l'on veut avec. \nPS : ${ReBot} est la version de test de ${bot.user}, et ${Sus}, celle de ${Stinger}.`)
 }
 
-async function editreact(message) {
-  /**
-   * ne sert à rien non plus
-   */
-  const channel = message.guild.channels.cache.get('683395478913679580');
-  const editmsg = await channel.messages.fetch('833383415528554496');
-
-  const phasmophobiaEmoji = '👻';
-  const codingemoji = '💻'
-  const debatemoji = '🎤'
-  const gameemoji = message.guild.emojis.cache.find(emoji => emoji.name == 'Saitama')
-  const Furyemoji = message.guild.emojis.cache.find(emoji => emoji.name == 'furry')
-  const Fursuitemoji = message.guild.emojis.cache.find(emoji => emoji.name == 'Ahouuuuu')
-  const Ninemoji = message.guild.emojis.cache.find(emoji => emoji.name == 'nintendo')
-  const bedrockemoji = message.guild.emojis.cache.find(emoji => emoji.name == 'bedrock')
-  const javaemoji = message.guild.emojis.cache.find(emoji => emoji.name == 'minecraft')
-
-  let embed = new Discord.MessageEmbed()
-            .setColor('#0042ff')
-            .setTitle('Roles : ')
-            .setDescription('Si vous voulez accéder aux différents channels : \n\n'
-                + `Phasmophobia : ${phasmophobiaEmoji}\n`
-                + `Coding : ${codingemoji}\n`
-                + `Débats : ${debatemoji}\n`
-                + `Jeux : ${gameemoji}\n`
-                + `Furry : ${Furyemoji}\n`
-                + `Fursuiter : ${Fursuitemoji}\n`
-                + `Nintendo : ${Ninemoji}\n`
-                + `Minecraft Bedrock : ${bedrockemoji}\n`
-                + `Minecraft Java : ${javaemoji}\n`
-            );
-  editmsg.edit(embed)
-  editmsg.react(gameemoji)
-  editmsg.react(Furyemoji);
-  editmsg.react(Fursuitemoji);
-  editmsg.react(Ninemoji);
-  editmsg.react(bedrockemoji);
-  editmsg.react(javaemoji);
-}
     
 function ping(message, prefix) {
   /**
